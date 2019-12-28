@@ -49,7 +49,7 @@ sf.board = {
     let board = new sf.Board();
     board.el = options.container;
     board.template = _.template(options.template.html());
-    sf.options.numRows = sf.options.numRows ? sf.options.numRows : 12; // default 12 rows
+    sf.options.numRows = sf.options.numRows ? sf.options.numRows : 10; // default 12 rows
     board.render();
   },
 
@@ -73,7 +73,7 @@ sf.board = {
           // the board, then reload the page.
           setTimeout(function() {
             window.location.reload();
-          }, 10000);
+          }, 1000);
         }
       }, stagger);
     };
@@ -103,7 +103,8 @@ sf.Items = Backbone.Collection.extend({
           numResults =
             results.length <= maxResults ? results.length : maxResults,
           numPages = Math.ceil(numResults / numRows),
-          pageInterval = options.pageInterval || 30000;
+//          pageInterval = options.pageInterval || 30000;
+          pageInterval = options.pageInterval || 2000;
 
         let i = 0,
           page = 0;
@@ -163,7 +164,8 @@ sf.Items = Backbone.Collection.extend({
     // TODO: do we still need this? It's 2019!
     if (sf.plugins[options.plugin].dataType === 'jsonp') {
       items.sync = (method, model, options) => {
-        options.timeout = 10000;
+//        options.timeout = 10000;
+        options.timeout = 1000;
         options.dataType = 'jsonp';
         return Backbone.sync(method, model, options);
       };
@@ -197,6 +199,7 @@ sf.Items = Backbone.Collection.extend({
     FullDrum: function() {
       return [
         ' ',
+        '.',
         'A',
         'B',
         'C',
@@ -233,7 +236,6 @@ sf.Items = Backbone.Collection.extend({
         '7',
         '8',
         '9',
-        '.',
         ',',
         '?',
         '!',
@@ -251,6 +253,7 @@ sf.Items = Backbone.Collection.extend({
     CharDrum: function() {
       return [
         ' ',
+        '.',
         'A',
         'B',
         'C',
@@ -277,12 +280,13 @@ sf.Items = Backbone.Collection.extend({
         'X',
         'Y',
         'Z',
-        '.',
+        '+',
+        '-',
         ','
       ];
     },
     NumDrum: function() {
-      return [' ', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '.', ','];
+      return [' ', '.', '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ',', '+'];
     },
     ImageDrum: function() {
       return []; // Intentionally empty here. Override in plugins/<plugin_name>/custom.js
@@ -294,11 +298,15 @@ sf.Items = Backbone.Collection.extend({
       // attach that array to the element's .data() object
       row.find('span').each((index, span) => {
         switch ($(span).closest('div')[0].className) {
+          case 'ranking':
+            $(span).data('order', new sf.display.NumDrum()); // Numbers only
+	    break;
           case 'number':
             $(span).data('order', new sf.display.NumDrum()); // Numbers only
             break;
           case 'character':
             $(span).data('order', new sf.display.CharDrum()); // Characters only
+//            $(span).data('order', new sf.display.FullDrum()); // Characters only
             break;
           case 'image':
             $(span).data('order', new sf.display.ImageDrum()); // Images
@@ -317,6 +325,7 @@ sf.Items = Backbone.Collection.extend({
       let i = 0;
       function loop() {
         setTimeout(function() {
+          console.log("in loop\n");
           if (input[i]) {
             console.log(`Row ${i + 1}:`, input[i]);
             sf.display.loadRow(input[i], $(rows[i]));

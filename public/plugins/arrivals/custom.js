@@ -1,4 +1,9 @@
+
 sf.display.ImageDrum = function() {
+ return("101");
+};
+
+sf.display.ImageDrum2 = function() {
   return [
     ' ',
     'SWA',
