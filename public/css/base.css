@@ -8,7 +8,7 @@ a {
   text-decoration: none;
 }
 .splitflap {
-  width: 1400px;
+  width: 1500px;
   overflow: none;
   white-space: nowrap;
   margin: 20px 10px;
@@ -54,9 +54,15 @@ a {
 .splitflap .status .sA {
   background: url('../img/lights_green.png') no-repeat;
 }
+
 .splitflap .status .sB {
   background: url('../img/lights_red.png') no-repeat;
 }
+
+.splitflap .status .sC {
+  background: url('../img/lights_red.png') no-repeat;
+}
+
 .splitflap .full,
 .splitflap .number,
 .splitflap .character {

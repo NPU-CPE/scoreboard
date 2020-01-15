@@ -1,26 +1,29 @@
 <html>
   <head>
     <link rel="stylesheet" href="css/base.css" />
-
     <!-- ============================================ -->
     <!-- CUSTOM CSS FOR THIS BOARD -->
     <link rel="stylesheet" href="plugins/arrivals/custom.css" />
   </head>
+<table style="width:100%"  align="center">
+<tr>
+<th> </th>
+<th>
   <body>
     <!-- ============================================ -->
     <!-- CONTAINER -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <div id="board" class="chartContainer splitflap">
-      <h1>NPU Typing speed contest 2020</h1>
-
+      <h1>CPE Typing speed contest</h1>
+      <h1>Qualifying (30 Dec 2019 to 20 Jan 2020)</h1>
+      <h2> <script>  document.write(new Date().toDateString());  </script> </h2>
       <!-- Header: 30px/char, 15px/separator, 120px/logo -->
-      <div class="header" style="width:120px;margin-left:0px;">#</div> 
-      <div class="header" style="width:120px;margin-left:30px;">Exam</div> 
-      <div class="header" style="width:360px;margin-left:30px;text-align:left;">
-        Contestant
-      </div>
-      <div class="header" style="width:90px;margin-left:30px;">Years</div>
-      <div class="header" style="width:135px;margin-left:30px;">Speed</div>
+      <div class="header" style="width:60px;margin-left:0px;text-align:center;">#</div>
+      <div class="header" style="width:10px;margin-left:0px;text-align:center;"></div>
+      <div class="header" style="width:100px;margin-left:30px;text-align:center;">Exam</div>
+      <div class="header" style="width:390px;margin-left:50px;text-align:center;">Contestant</div>
+      <div class="header" style="width:50px;margin-left:50px;">Grade</div>
+      <div class="header" style="width:135px;margin-left:50px;">AWPM</div>
       <div class="header" style="width:270px;margin-left:30px;text-align:center;">
         Remarks
       </div>
@@ -35,8 +38,6 @@
     <script type="text/template" id="row_template">
       <div class="row">
         <div class="group ranking"> <!-- ranking -->
-          <div class="number"><span></span></div>
-          <div class="number"><span></span></div>
           <div class="number"><span></span></div>
           <div class="number"><span></span></div>
         </div>
@@ -60,13 +61,13 @@
           <div class="character"><span></span></div>
           <div class="character"><span></span></div>
           <div class="character"><span></span></div>
+          <div class="character"><span></span></div>
         </div>
         <div class="group grade"> <!-- gate -->
           <div class="character"><span></span></div>
-          <div class="full"><span></span></div>
-          <div class="character"><span></span></div>
+          <div class="number"><span></span></div>
         </div>
-        <div class="group wpm"> <!-- scheduled -->
+        <div class="group adj_wpm"> <!-- scheduled -->
           <div class="number"><span></span></div>
           <div class="number"><span></span></div>
           <div class="number"><span></span></div>
@@ -74,6 +75,9 @@
           <div class="number"><span></span></div>
         </div>
         <div class="group remarks"> <!-- remarks -->
+          <div class="full"><span></span></div>
+          <div class="full"><span></span></div>
+          <div class="full"><span></span></div>
           <div class="full"><span></span></div>
           <div class="full"><span></span></div>
           <div class="full"><span></span></div>
@@ -119,13 +123,13 @@
         plugin: 'arrivals', // Plugin to load
         container: $('#board'), // Where in the DOM to put the board
         template: $('#row_template'), // Where in the DOM to find the row template
-        numRows: 10, // number of rows
+        numRows: 12, // number of rows
 
         // OPTIONAL
-        sort: 'wpm', // the column to sort by
+        sort: 'adj_wpm', // the column to sort by
         order: 'desc', // the order to sort by
-        maxResults: 10, // number of items to retrieve from service
-        pageInterval: 1000, // delay between pages (ms)
+        maxResults: 53, // number of items to retrieve from service
+        pageInterval: 5000, // delay between pages (ms)
         stagger: 2000 // delay between loading rows (ms)
       };
 
@@ -136,4 +140,7 @@
       });
     </script>
   </body>
+</th>
+<th></th>
+</tr>
 </html>

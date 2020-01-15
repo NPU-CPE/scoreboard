@@ -3,6 +3,8 @@
 'use strict';
 var $ = require("jquery");
 
+const DEBUG=false;
+
 const express = require('express'),
   app = express();
 
@@ -110,12 +112,19 @@ function getContestant(userID){
   'b603110310167',
   'b603110310175',
   'b593030710011',
+  '593030710011',
   'b593030710028',
+  '593030710028',
   'b593030710036',
+  '593030710036',
   'b593030710044',
+  '593030710044',
   'b593030710051',
+  '593030710051',
   'b593030710085',
+  '593030710085',
   'b593030710127',
+  '593030710127',
   'sk',
   'songrit'
  ];
@@ -133,7 +142,6 @@ function getContestant(userID){
            ];
   }
  }
-//    console.log(i +":"+usersJSON[i].ID+":"+userID);
     return "No match";
 }
 
@@ -142,18 +150,15 @@ function YearNum(year){
      if (year==2561) return("Y2");
      if (year==2560) return("Y3");
      if (year==2559) return("Y4");
-     else return("YX");
+     else return("Y5");
 }
 
 function YearName(year){
-    switch(year){
-     case 2562: return("Freshie");break;
-     case 2561: return("Sophomore");break;
-     case 2560: return("Senior");break;
-     case 2559: return("Super Senior");break;
-     default: return("Super Senior");
-    }
- return(-1);
+     if (year==2562) return("First");
+     if (year==2561) return("Second");
+     if (year==2560) return("Third");
+     if (year==2559) return("Fouth");
+     else return("Fifth");
 }
 
 function getWPM() {
@@ -195,21 +200,38 @@ app.use('/api/arrivals', (req, res) => {
     // Create the data for a row.
     var contest=getContestant(dataJSON[i].users);
     let data = {
-      ranking: dataJSON.length-i,
+      ranking: i+1,
       exam: dataJSON[i].exam.charAt(7)+dataJSON[i].exam.charAt(8)+dataJSON[i].exam.charAt(9),
       name: contest[0],
       grade: contest[2],
-      wpm: dataJSON[i].adj_wpm
+      wpm: dataJSON[i].wpm,
+      adj_wpm: dataJSON[i].adj_wpm,
+      error: dataJSON[i].error,
     };
 
+    if(DEBUG) console.log(data);
+
     // Let's add an occasional delayed exam.
-    data.status = getRandomInt(10) > 7 ? 'B' : 'A';
+    if(dataJSON[i].adj_wpm=='0' ) {
+      data.status = 'B';
+    }else{
+      data.status = 'A';
+    }
+
     if (data.status === 'B') {
-      data.remarks = `Delayed ${getRandomInt(50)}M`;
+      data.remarks = 'Online';
+    }else{
+      if(dataJSON[i].adj_wpm>=10 && data.exam.toString()=="L28") {
+       data.adj_wpm_c='>=10wpm'
+       data.remarks = 'Pass';
+      }else{
+       data.adj_wpm_c='<10wpm'
+       data.remarks = 'Unqualified';
+       data.status = 'B';
+      }
     }
 
     // Add the row the the response.
-   console.log(data);
     r.data.push(data);
   }
 
@@ -223,6 +245,7 @@ app.use('/', express.static('public'));
 
 // ========================================================================
 // WEB SERVER
-const port = process.env.PORT || 8080;
+
+const port = process.env.PORT || 8081;
 app.listen(port);
 console.log('split flap started on port ' + port);
