@@ -63,6 +63,10 @@ a {
   background: url('../img/lights_red.png') no-repeat;
 }
 
+.splitflap .status .sD {
+  background: url('../img/lights_yellow.png') no-repeat;
+}
+
 .splitflap .full,
 .splitflap .number,
 .splitflap .character {

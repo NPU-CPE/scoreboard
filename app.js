@@ -207,31 +207,39 @@ app.use('/api/arrivals', (req, res) => {
       wpm: dataJSON[i].wpm,
       adj_wpm: dataJSON[i].adj_wpm,
       error: dataJSON[i].error,
+      online: dataJSON[i].online,
     };
 
     if(DEBUG) console.log(data);
 
-    // Let's add an occasional delayed exam.
-    if(dataJSON[i].adj_wpm=='0' ) {
-      data.status = 'B';
+    // Let's set status online/offline
+
+    if(dataJSON[i].online=='YES' ) {
+	data.status = 'D';
     }else{
+	data.status = 'B';
+    }
+
+    if(dataJSON[i].adj_wpm==0&&data.status==='A'&& data.exam.toString()==="L28") {
+      data.remarks = 'Speed Drill';
+    }else if(dataJSON[i].adj_wpm>=10 && data.status==='B' && data.exam.toString()==="L28" ) {
       data.status = 'A';
-    }
-
-    if (data.status === 'B') {
-      data.remarks = 'Online';
+      data.remarks = 'PASS';
+    }else if(dataJSON[i].adj_wpm<10 && data.status==='B' && data.exam.toString()==="L28" ) {
+      data.remarks = 'Status 4';
+    }else if(dataJSON[i].adj_wpm>=10 && data.exam.toString()==="L28" ) {
+      data.remarks = 'PASS';
+    }else if(dataJSON[i].adj_wpm<10 && data.status==='A' && data.exam.toString()==="L28" ) {
+      data.remarks = 'try again';
+    }else if(dataJSON[i].adj_wpm<10 && data.status==='B' && data.exam.toString()==="L28" ) {
+      data.remarks = 'Status 1';
+    }else if(dataJSON[i].adj_wpm<10 && data.status==='B' ) {
+      data.remarks = 'Status 2';
     }else{
-      if(dataJSON[i].adj_wpm>=10 && data.exam.toString()=="L28") {
-       data.adj_wpm_c='>=10wpm'
-       data.remarks = 'Pass';
-      }else{
-       data.adj_wpm_c='<10wpm'
-       data.remarks = 'Unqualified';
-       data.status = 'B';
-      }
+      data.remarks = 'Online';
     }
 
-    // Add the row the the response.
+// Add the row the the response.
     r.data.push(data);
   }
 
