@@ -22,7 +22,7 @@
       <div class="header" style="width:10px;margin-left:0px;text-align:center;"></div>
       <div class="header" style="width:100px;margin-left:30px;text-align:center;">Exam</div>
       <div class="header" style="width:390px;margin-left:50px;text-align:center;">Contestant</div>
-      <div class="header" style="width:50px;margin-left:50px;">Grade</div>
+      <div class="header" style="width:50px;margin-left:50px;">Years</div>
       <div class="header" style="width:135px;margin-left:50px;">AWPM</div>
       <div class="header" style="width:270px;margin-left:30px;text-align:center;">
         Remarks
@@ -130,8 +130,8 @@
         sort: 'adj_wpm', // the column to sort by
         order: 'desc', // the order to sort by
         maxResults: 53, // number of items to retrieve from service
-        pageInterval: 4000, // delay between pages (ms)
-        stagger: 2000 // delay between loading rows (ms)
+        pageInterval: 500, // delay between pages (ms)
+        stagger: 1000 // delay between loading rows (ms)
       };
 
       $(document).ready(function() {
