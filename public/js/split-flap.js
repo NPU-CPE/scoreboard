@@ -325,12 +325,11 @@ sf.Items = Backbone.Collection.extend({
       let i = 0;
       function loop() {
         setTimeout(function() {
-          console.log("in loop\n");
           if (input[i]) {
-            console.log(`Row ${i + 1}:`, input[i]);
+//            console.log(`Row ${i + 1}:`, input[i]);
             sf.display.loadRow(input[i], $(rows[i]));
           } else {
-            console.log(`Row ${i + 1}: Empty`);
+//            console.log(`Row ${i + 1}: Empty`);
             sf.board.clearRow(rows[i]);
           }
           i++;

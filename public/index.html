@@ -1,26 +1,29 @@
 <html>
   <head>
+    <meta http-equiv="refresh" content="360">
     <link rel="stylesheet" href="css/base.css" />
-
     <!-- ============================================ -->
     <!-- CUSTOM CSS FOR THIS BOARD -->
     <link rel="stylesheet" href="plugins/arrivals/custom.css" />
   </head>
+<table style="width:100%"  align="center">
+<tr>
+<th>
   <body>
     <!-- ============================================ -->
     <!-- CONTAINER -->
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <div id="board" class="chartContainer splitflap">
-      <h1>NPU Typing speed contest 2020</h1>
-
+      <h1>Computer Engineering Typing speed contest 2020</h1>
+      <h1>Final Round</h1>
+      <h2> 25-January-2020 (10:00-12:00)</h2>
       <!-- Header: 30px/char, 15px/separator, 120px/logo -->
-      <div class="header" style="width:120px;margin-left:0px;">#</div> 
-      <div class="header" style="width:120px;margin-left:30px;">Exam</div> 
-      <div class="header" style="width:360px;margin-left:30px;text-align:left;">
-        Contestant
-      </div>
-      <div class="header" style="width:90px;margin-left:30px;">Years</div>
-      <div class="header" style="width:135px;margin-left:30px;">Speed</div>
+      <div class="header" style="width:60px;margin-left:0px;text-align:center;">#</div> 
+      <div class="header" style="width:10px;margin-left:0px;text-align:center;"></div> 
+      <div class="header" style="width:100px;margin-left:30px;text-align:center;">Exam</div> 
+      <div class="header" style="width:390px;margin-left:50px;text-align:center;">Contestant</div>
+      <div class="header" style="width:50px;margin-left:50px;">Years</div>
+      <div class="header" style="width:135px;margin-left:50px;">AWPM</div>
       <div class="header" style="width:270px;margin-left:30px;text-align:center;">
         Remarks
       </div>
@@ -37,13 +40,11 @@
         <div class="group ranking"> <!-- ranking -->
           <div class="number"><span></span></div>
           <div class="number"><span></span></div>
-          <div class="number"><span></span></div>
-          <div class="number"><span></span></div>
         </div>
         <div class="group exam"> <!-- exam number -->
           <div class="character"><span></span></div>
-          <div class="number"><span></span></div>
-          <div class="number"><span></span></div>
+          <div class="character"><span></span></div>
+          <div class="character"><span></span></div>
           <div class="number"><span></span></div>
         </div>
         <div class="group name"> <!-- city -->
@@ -60,13 +61,13 @@
           <div class="character"><span></span></div>
           <div class="character"><span></span></div>
           <div class="character"><span></span></div>
+          <div class="character"><span></span></div>
         </div>
         <div class="group grade"> <!-- gate -->
           <div class="character"><span></span></div>
-          <div class="full"><span></span></div>
-          <div class="character"><span></span></div>
+          <div class="number"><span></span></div>
         </div>
-        <div class="group wpm"> <!-- scheduled -->
+        <div class="group adj_wpm"> <!-- scheduled -->
           <div class="number"><span></span></div>
           <div class="number"><span></span></div>
           <div class="number"><span></span></div>
@@ -83,9 +84,13 @@
           <div class="full"><span></span></div>
           <div class="full"><span></span></div>
           <div class="full"><span></span></div>
+          <div class="full"><span></span></div>
+          <div class="full"><span></span></div>
+          <div class="full"><span></span></div>
         </div>
         <div class="group status"> <!-- lights -->
           <div class="sA"></div>
+	  <div class="sD"></div>
           <div class="sB"></div>
         </div>
       </div>
@@ -119,13 +124,13 @@
         plugin: 'arrivals', // Plugin to load
         container: $('#board'), // Where in the DOM to put the board
         template: $('#row_template'), // Where in the DOM to find the row template
-        numRows: 10, // number of rows
+        numRows: 15, // number of rows
 
         // OPTIONAL
-        sort: 'wpm', // the column to sort by
+        sort: 'adj_wpm', // the column to sort by
         order: 'desc', // the order to sort by
-        maxResults: 10, // number of items to retrieve from service
-        pageInterval: 1000, // delay between pages (ms)
+        maxResults: 59, // number of items to retrieve from service
+        pageInterval: 2000, // delay between pages (ms)
         stagger: 2000 // delay between loading rows (ms)
       };
 
@@ -136,4 +141,6 @@
       });
     </script>
   </body>
+</th>
+</tr>
 </html>
